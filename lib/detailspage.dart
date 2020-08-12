@@ -61,6 +61,7 @@ class _DetailPageState extends State<DetailPage> {
                           .toString();
                     });
                     Navigator.of(context).pop('return this');
+                    Navigator.pop(context);
                   } else if (_controller.text.isEmpty) {
                     isIt = true;
                   } else {

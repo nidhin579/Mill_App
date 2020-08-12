@@ -19,6 +19,35 @@ class _CartPageState extends State<CartPage> {
     _controller2 = TextEditingController();
   }
 
+  void _showDialog2() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: Center(child: Text("THANK YOU")),
+          content: Container(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [Text('Order has been placed.')],
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+                child: new Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.pop(context);
+                }),
+          ],
+        );
+      },
+    );
+  }
+
   void _showDialog() {
     // flutter defined function
     showDialog(
@@ -56,9 +85,17 @@ class _CartPageState extends State<CartPage> {
             new FlatButton(
                 child: new Text("Book now"),
                 onPressed: () {
-                  if (_controller2.text.isEmpty) {
-                    isIt2 = true;
-                  }
+                  setState(() {
+                    if (_controller2.text.isEmpty) {
+                      isIt2 = true;
+                    } else {
+                      setState(() {
+                        cart = [];
+                        Navigator.of(context).pop();
+                        _showDialog2();
+                      });
+                    }
+                  });
                 }),
           ],
         );
