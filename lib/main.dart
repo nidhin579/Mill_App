@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mill_app/cartpage.dart';
 import 'package:mill_app/detailspage.dart';
 import 'package:mill_app/firstpage.dart';
 
@@ -25,7 +26,8 @@ class _MillAppState extends State<MillApp> {
       routes: {
         Home.id: (context) => Home(),
         DetailPage.id: (context) => DetailPage(),
-        FirstPage.id: (context) => FirstPage()
+        FirstPage.id: (context) => FirstPage(),
+        CartPage.id: (context) => CartPage()
       },
     );
   }

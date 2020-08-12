@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mill_app/cartpage.dart';
 import 'package:mill_app/detailspage.dart';
 import 'package:mill_app/items.dart';
 
@@ -54,7 +55,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            setState(() {});
+            Navigator.pushNamed(context, CartPage.id);
           },
           child: Icon(
             Icons.shopping_cart,

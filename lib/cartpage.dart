@@ -2,63 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'items.dart';
 
-class DetailPage extends StatefulWidget {
-  static const String id = "DetailPage";
+class CartPage extends StatefulWidget {
+  static const String id = "CartPage";
   @override
-  _DetailPageState createState() => _DetailPageState();
+  _CartPageState createState() => _CartPageState();
 }
 
-class _DetailPageState extends State<DetailPage> {
-  TextEditingController _controller;
+class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller = TextEditingController();
-  }
-
-  void _showDialog() {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: Center(child: Text("ADD TO CART")),
-          content: Container(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Text(
-                    'Product :$product',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  TextField(
-                    controller: _controller,
-                    decoration: InputDecoration(
-                      labelText: 'Amount needed',
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Add to cart"),
-              onPressed: () {
-                cart.add(['', '']);
-                cart[noitem][0] = product;
-                cart[noitem][1] = _controller.text;
-                noitem++;
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   Widget listedItem(String item) {
@@ -77,9 +31,6 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  var product = items[selection][0];
-  var quantity = items[selection][1];
-  var price = items[selection][2];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,25 +80,7 @@ class _DetailPageState extends State<DetailPage> {
                     Container(
                       color: Colors.grey.withOpacity(0.10),
                       child: Column(
-                        children: [
-                          listedItem('Product : $product'),
-                          listedItem(
-                            'Available amount : $quantity',
-                          ),
-                          listedItem(
-                            'Price : $price',
-                          ),
-                          FlatButton(
-                            onPressed: () {
-                              _showDialog();
-                            },
-                            color: Colors.amber,
-                            child: Text(
-                              'ADD TO CART',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ],
+                        children: [for (var item in cart) listedItem(item[0])],
                       ),
                     ),
                     FlatButton(

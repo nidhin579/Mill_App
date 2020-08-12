@@ -8,6 +8,6 @@ var items = [
 
 int selection;
 //cart[0]
-var cart = [[], [], []];
+var cart = [];
 
 int noitem = 0;
