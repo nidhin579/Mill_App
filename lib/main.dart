@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mill_app/detailspage.dart';
 
 import 'homepage.dart';
 
@@ -18,6 +19,12 @@ class MillApp extends StatefulWidget {
 class _MillAppState extends State<MillApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Home());
+    return MaterialApp(
+      initialRoute: Home.id,
+      routes: {
+        Home.id: (context) => Home(),
+        DetailPage.id: (context) => DetailPage()
+      },
+    );
   }
 }

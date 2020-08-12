@@ -1,1 +1,1 @@
-List<String> items = ['Coconut oil', 'Pinnakk', 'Flour'];
+List<String> items = ['Coconut oil', 'Pinnak', 'Flour'];

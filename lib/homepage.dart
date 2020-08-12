@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'items.dart';
+import 'package:mill_app/detailspage.dart';
+import 'package:mill_app/items.dart';
 
 class Home extends StatefulWidget {
+  static const String id = "Home";
   @override
   _HomeState createState() => _HomeState();
 }
@@ -41,35 +42,31 @@ class _HomeState extends State<Home> {
             children: [
               Expanded(
                 flex: 2,
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                child: Hero(
+                  tag: 'violet',
+                  child: Stack(
                     children: [
-                      Text(
-                        'Mill',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 60),
+                      Container(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.bottomLeft,
+                                colors: [
+                                  Color.fromRGBO(101, 93, 176, 1),
+                                  Color.fromRGBO(101, 93, 176, 1)
+                                ]),
+                            borderRadius: BorderRadius.vertical(
+                                bottom: Radius.circular(30))),
                       ),
-                      Text(
-                        'App',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 20),
-                      )
+                      Center(
+                        child: Container(
+                          height: 70,
+                          child: Image.asset(
+                            'images/log.jpg',
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.bottomLeft,
-                          colors: [
-                            Color.fromRGBO(101, 93, 176, 1),
-                            Color.fromRGBO(101, 93, 176, 1)
-                          ]),
-                      borderRadius:
-                          BorderRadius.vertical(bottom: Radius.circular(30))),
                 ),
               ),
               Expanded(
@@ -94,7 +91,9 @@ class _HomeState extends State<Home> {
                                   ),
                                   Center(
                                     child: FlatButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        setState(() {});
+                                      },
                                       color: Colors.amber,
                                       child: Text(
                                         'BOOK NOW',
@@ -141,7 +140,9 @@ class _HomeState extends State<Home> {
                     Container(
                       alignment: Alignment.bottomCenter,
                       child: FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, DetailPage.id);
+                        },
                         color: Colors.amber,
                         child: Text(
                           'View Details',
