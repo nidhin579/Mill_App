@@ -18,9 +18,32 @@ class _HomeState extends State<Home> {
         height: 60,
         color: Colors.white.withOpacity(0.5),
         child: Center(
-            child: Text(
-          item,
-          style: TextStyle(fontSize: 25),
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              item,
+              style: TextStyle(fontSize: 25),
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              child: FlatButton(
+                onPressed: () {
+                  for (int i = 0; i < items.length; i++) {
+                    if (items[i][0] == item) {
+                      selection = i;
+                    }
+                  }
+                  Navigator.pushNamed(context, DetailPage.id);
+                },
+                color: Colors.amber,
+                child: Text(
+                  'View Details',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            )
+          ],
         )),
       ),
     );
@@ -30,9 +53,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            setState(() {});
+          },
           child: Icon(
-            Icons.refresh,
+            Icons.shopping_cart,
           ),
           backgroundColor: Colors.amber,
         ),
@@ -92,7 +117,7 @@ class _HomeState extends State<Home> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
                                     ),
-                                    for (var item in items) listedItem(item)
+                                    for (var item in items) listedItem(item[0])
                                   ],
                                 ),
                               ),
@@ -107,19 +132,6 @@ class _HomeState extends State<Home> {
                           borderRadius: BorderRadius.circular(30),
                           color: Colors.grey.withOpacity(0.3)),
                     ),
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, DetailPage.id);
-                        },
-                        color: Colors.amber,
-                        child: Text(
-                          'View Details',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    )
                   ],
                 ),
               )

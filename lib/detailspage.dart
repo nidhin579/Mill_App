@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'items.dart';
+
 class DetailPage extends StatefulWidget {
   static const String id = "DetailPage";
   @override
@@ -7,6 +9,52 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: Center(child: Text("ADD TO CART")),
+          content: Container(
+            child: Column(
+              children: [Text(product), Text('THis one')],
+            ),
+          ),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget listedItem(String item) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: double.infinity,
+        height: 60,
+        color: Colors.white.withOpacity(0.5),
+        child: Center(
+            child: Text(
+          item,
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        )),
+      ),
+    );
+  }
+
+  var product = items[selection][0];
+  var quantity = items[selection][1];
+  var price = items[selection][2];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,29 +95,50 @@ class _DetailPageState extends State<DetailPage> {
             flex: 6,
             child: Container(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Container(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    color: Colors.grey.withOpacity(0.10),
+                    child: Column(
+                      children: [
+                        listedItem('Product : $product'),
+                        listedItem(
+                          'Available amount : $quantity',
                         ),
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Color.fromRGBO(232, 247, 252, 1)),
+                        listedItem(
+                          'Price : $price',
+                        ),
+                        FlatButton(
+                          onPressed: () {
+                            _showDialog();
+                          },
+                          color: Colors.amber,
+                          child: Text(
+                            'ADD TO CART',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
-                  )
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: Colors.amber,
+                    child: Text(
+                      'BACK',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 ],
               ),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  color: Colors.grey.withOpacity(0.3)),
+                  color: Color.fromRGBO(232, 247, 252, 1)),
             ),
           )
         ],
