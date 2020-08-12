@@ -18,14 +18,26 @@ class _DetailPageState extends State<DetailPage> {
         return AlertDialog(
           title: Center(child: Text("ADD TO CART")),
           content: Container(
-            child: Column(
-              children: [Text(product), Text('THis one')],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text(
+                    'Product :$product',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Amount needed',
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new FlatButton(
-              child: new Text("Close"),
+              child: new Text("Add to cart"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -93,54 +105,59 @@ class _DetailPageState extends State<DetailPage> {
           ),
           Expanded(
             flex: 6,
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    color: Colors.grey.withOpacity(0.10),
-                    child: Column(
-                      children: [
-                        listedItem('Product : $product'),
-                        listedItem(
-                          'Available amount : $quantity',
-                        ),
-                        listedItem(
-                          'Price : $price',
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            _showDialog();
-                          },
-                          color: Colors.amber,
-                          child: Text(
-                            'ADD TO CART',
-                            style: TextStyle(color: Colors.white),
+            child: SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 100,
+                    ),
+                    Container(
+                      color: Colors.grey.withOpacity(0.10),
+                      child: Column(
+                        children: [
+                          listedItem('Product : $product'),
+                          listedItem(
+                            'Available amount : $quantity',
                           ),
-                        ),
-                      ],
+                          listedItem(
+                            'Price : $price',
+                          ),
+                          FlatButton(
+                            onPressed: () {
+                              _showDialog();
+                            },
+                            color: Colors.amber,
+                            child: Text(
+                              'ADD TO CART',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    color: Colors.amber,
-                    child: Text(
-                      'BACK',
-                      style: TextStyle(color: Colors.white),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.amber,
+                      child: Text(
+                        'BACK',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 100,
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Color.fromRGBO(232, 247, 252, 1)),
               ),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Color.fromRGBO(232, 247, 252, 1)),
             ),
-          )
+          ),
         ],
       ),
     ));
