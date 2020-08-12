@@ -78,36 +78,6 @@ class _HomeState extends State<Home> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Expanded(
-                            flex: 1,
-                            child: Padding(
-                              padding: const EdgeInsets.all(30),
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color:
-                                            Color.fromRGBO(232, 247, 252, 1)),
-                                  ),
-                                  Center(
-                                    child: FlatButton(
-                                      onPressed: () {
-                                        setState(() {});
-                                      },
-                                      color: Colors.amber,
-                                      child: Text(
-                                        'BOOK NOW',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
                             flex: 2,
                             child: Container(
                               child: SingleChildScrollView(
