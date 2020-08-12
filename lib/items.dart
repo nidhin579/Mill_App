@@ -11,3 +11,5 @@ int selection;
 var cart = [];
 
 int noitem = 0;
+bool isIt = false;
+bool isIt2 = false;

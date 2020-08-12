@@ -36,6 +36,7 @@ class _DetailPageState extends State<DetailPage> {
                   TextField(
                     controller: _controller,
                     decoration: InputDecoration(
+                      errorText: (isIt) ? 'There isnt much' : null,
                       labelText: 'Amount needed',
                     ),
                   )
@@ -46,15 +47,28 @@ class _DetailPageState extends State<DetailPage> {
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new FlatButton(
-              child: new Text("Add to cart"),
-              onPressed: () {
-                cart.add(['', '']);
-                cart[noitem][0] = product;
-                cart[noitem][1] = _controller.text;
-                noitem++;
-                Navigator.of(context).pop();
-              },
-            ),
+                child: new Text("Add to cart"),
+                onPressed: () {
+                  if (int.parse(_controller.text) <= int.parse(quantity)) {
+                    cart.add(['', '']);
+                    isIt = false;
+                    cart[noitem][0] = product;
+                    cart[noitem][1] = _controller.text;
+                    noitem++;
+                    setState(() {
+                      items[selection][1] = (int.parse(items[selection][1]) -
+                              int.parse(_controller.text))
+                          .toString();
+                    });
+                    Navigator.of(context).pop('return this');
+                  } else if (_controller.text.isEmpty) {
+                    isIt = true;
+                  } else {
+                    setState(() {
+                      isIt = true;
+                    });
+                  }
+                }),
           ],
         );
       },

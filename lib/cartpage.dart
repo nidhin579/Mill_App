@@ -9,13 +9,64 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  TextEditingController _controller1;
+  TextEditingController _controller2;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _controller1 = TextEditingController();
+    _controller2 = TextEditingController();
   }
 
-  Widget listedItem(String item) {
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: Center(child: Text("PROCEED TO BOOK")),
+          content: Container(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  TextField(
+                    controller: _controller1,
+                    decoration: InputDecoration(
+                      errorText: (_controller1.text.isEmpty)
+                          ? 'It cant be empty'
+                          : null,
+                      labelText: 'Enter Name',
+                    ),
+                  ),
+                  TextField(
+                    controller: _controller2,
+                    decoration: InputDecoration(
+                      errorText: (isIt2) ? 'It cant be empty' : null,
+                      labelText: 'Enter Mobile No.',
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+                child: new Text("Book now"),
+                onPressed: () {
+                  if (_controller2.text.isEmpty) {
+                    isIt2 = true;
+                  }
+                }),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget listedItem(String item, String item2) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -24,7 +75,7 @@ class _CartPageState extends State<CartPage> {
         color: Colors.white.withOpacity(0.5),
         child: Center(
             child: Text(
-          item,
+          item + ' : ' + item2 + ' Kg',
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         )),
       ),
@@ -74,13 +125,32 @@ class _CartPageState extends State<CartPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Text(
+                      'CART',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                      ),
+                    ),
                     SizedBox(
-                      height: 100,
+                      height: 50,
                     ),
                     Container(
                       color: Colors.grey.withOpacity(0.10),
                       child: Column(
-                        children: [for (var item in cart) listedItem(item[0])],
+                        children: [
+                          for (var item in cart) listedItem(item[0], item[1]),
+                        ],
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        _showDialog();
+                      },
+                      color: Colors.amber,
+                      child: Text(
+                        'PROCEED TO BOOK',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                     FlatButton(
